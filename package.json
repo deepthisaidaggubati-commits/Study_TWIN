@@ -1,0 +1,17 @@
+{
+  "name": "studytwin-ai",
+  "version": "1.0.0",
+  "description": "StudyTwin AI - Digital Twin for Student Learning & Performance Prediction",
+  "scripts": {
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "dev:ml": "cd ml-service && python -m uvicorn app.main:app --reload --port 8000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
