@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
+import StudyTwinLogo from '../components/brand/StudyTwinLogo';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import { Mail, Lock, LogIn, Sparkles } from 'lucide-react';
@@ -35,13 +36,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col justify-center items-center p-4">
-      <div className="w-full max-w-md space-y-8 bg-slate-900/80 border border-slate-800 p-8 rounded-3xl shadow-2xl backdrop-blur-md">
-        <div className="text-center space-y-2">
-          <div className="inline-flex w-12 h-12 rounded-2xl bg-indigo-600 items-center justify-center font-black text-white text-2xl shadow-lg shadow-indigo-600/30 mb-2">
-            ST
-          </div>
-          <h2 className="text-2xl font-bold text-white tracking-tight">Welcome Back to StudyTwin</h2>
+    <div className="min-h-screen bg-slate-950 flex flex-col justify-center items-center p-4 relative overflow-hidden">
+      {/* Background Glow Orbs */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-violet-600/10 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-fuchsia-600/10 blur-3xl pointer-events-none" />
+
+      <div className="w-full max-w-md space-y-8 bg-slate-900/80 border border-violet-500/20 p-8 rounded-3xl shadow-2xl backdrop-blur-xl relative z-10">
+        <div className="flex flex-col items-center text-center space-y-3">
+          <StudyTwinLogo variant="full" size="xl" animated showTagline />
+          <h2 className="text-xl font-bold text-white tracking-tight pt-2">Welcome Back</h2>
           <p className="text-xs text-slate-400">Enter your credentials to access your Digital Twin</p>
         </div>
 
@@ -74,7 +77,7 @@ export default function LoginPage() {
 
         <div className="text-center pt-2 border-t border-slate-800 text-xs text-slate-400">
           Don't have a Digital Twin yet?{' '}
-          <Link to="/register" className="text-indigo-400 font-semibold hover:underline">
+          <Link to="/register" className="text-fuchsia-400 font-semibold hover:underline">
             Register Here
           </Link>
         </div>

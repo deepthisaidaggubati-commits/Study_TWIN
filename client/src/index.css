@@ -4,22 +4,53 @@
 
 @layer base {
   body {
-    @apply bg-slate-950 text-slate-100 font-sans min-h-screen;
+    @apply bg-slate-950 text-slate-100 font-sans min-h-screen selection:bg-violet-600 selection:text-white;
   }
 }
 
-/* Custom Scrollbar */
+/* Custom Futuristic Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b0f19;
+  background: #08080d;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #1f1b2e;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #3b2d54;
+}
+
+/* Keyframes for StudyTwin AI Animated Digital Twin */
+@keyframes dash {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes twinGlowPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
+}
+
+/* Respect Reduced Motion Settings */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

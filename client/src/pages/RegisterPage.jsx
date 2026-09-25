@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
+import StudyTwinLogo from '../components/brand/StudyTwinLogo';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import { User, Mail, Lock, BookOpen, GraduationCap, Calendar, UserPlus } from 'lucide-react';
@@ -45,13 +46,15 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col justify-center items-center p-4">
-      <div className="w-full max-w-lg space-y-6 bg-slate-900/80 border border-slate-800 p-8 rounded-3xl shadow-2xl backdrop-blur-md">
-        <div className="text-center space-y-2">
-          <div className="inline-flex w-12 h-12 rounded-2xl bg-indigo-600 items-center justify-center font-black text-white text-2xl shadow-lg shadow-indigo-600/30 mb-2">
-            ST
-          </div>
-          <h2 className="text-2xl font-bold text-white tracking-tight">Create Your Study Twin</h2>
+    <div className="min-h-screen bg-slate-950 flex flex-col justify-center items-center p-4 relative overflow-hidden">
+      {/* Background Glow Orbs */}
+      <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-violet-600/10 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 left-1/4 w-96 h-96 rounded-full bg-fuchsia-600/10 blur-3xl pointer-events-none" />
+
+      <div className="w-full max-w-lg space-y-6 bg-slate-900/80 border border-violet-500/20 p-8 rounded-3xl shadow-2xl backdrop-blur-xl relative z-10">
+        <div className="flex flex-col items-center text-center space-y-3">
+          <StudyTwinLogo variant="full" size="xl" animated showTagline />
+          <h2 className="text-xl font-bold text-white tracking-tight pt-2">Create Your AI Digital Twin</h2>
           <p className="text-xs text-slate-400">Build your digital learning state representation</p>
         </div>
 
@@ -97,7 +100,7 @@ export default function RegisterPage() {
                 name="academicLevel"
                 value={formData.academicLevel}
                 onChange={handleChange}
-                className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-indigo-500"
+                className="w-full bg-slate-900/90 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-500/30"
               >
                 <option value="High School">High School</option>
                 <option value="Undergraduate">Undergraduate</option>
@@ -134,7 +137,7 @@ export default function RegisterPage() {
 
         <div className="text-center pt-2 border-t border-slate-800 text-xs text-slate-400">
           Already have a Twin?{' '}
-          <Link to="/login" className="text-indigo-400 font-semibold hover:underline">
+          <Link to="/login" className="text-fuchsia-400 font-semibold hover:underline">
             Sign In Here
           </Link>
         </div>

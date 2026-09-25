@@ -33,8 +33,8 @@ export default function Input({
           onChange={onChange}
           placeholder={placeholder}
           required={required}
-          className={`w-full bg-slate-900 border ${
-            error ? 'border-rose-500/80 focus:ring-rose-500' : 'border-slate-800 focus:border-indigo-500 focus:ring-indigo-500/30'
+          className={`w-full bg-slate-900/90 border ${
+            error ? 'border-rose-500/80 focus:ring-rose-500' : 'border-slate-800 focus:border-violet-500 focus:ring-violet-500/30'
           } rounded-xl ${Icon ? 'pl-10' : 'px-4'} py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 transition-all duration-200 ${className}`}
           {...props}
         />

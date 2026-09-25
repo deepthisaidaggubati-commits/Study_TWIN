@@ -4,6 +4,7 @@ import API from '../services/api';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
+import DashboardTwinHero from '../components/brand/DashboardTwinHero';
 import { useAuth } from '../context/AuthContext';
 import {
   Brain,
@@ -68,7 +69,7 @@ export default function DashboardPage() {
   if (loading) {
     return (
       <div className="space-y-6 animate-pulse p-2">
-        <div className="h-28 bg-slate-900 rounded-3xl border border-slate-800" />
+        <div className="h-44 bg-slate-900 rounded-3xl border border-slate-800" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[1, 2, 3, 4].map(i => (
             <div key={i} className="h-28 bg-slate-900 rounded-2xl border border-slate-800" />
@@ -96,57 +97,30 @@ export default function DashboardPage() {
     );
   }
 
-  const PIE_COLORS = ['#ef4444', '#f59e0b', '#10b981'];
-
-  const pieData = [
-    { name: 'Low Mastery (0-40%)', value: data?.masteryDistribution?.low || 0 },
-    { name: 'Medium Mastery (41-70%)', value: data?.masteryDistribution?.medium || 0 },
-    { name: 'High Mastery (71-100%)', value: data?.masteryDistribution?.high || 0 }
-  ].filter(d => d.value > 0);
-
   const isNewUser = (data?.totalTopicsCount || 0) === 0;
 
   return (
     <div className="space-y-8">
-      {/* 1. Header Banner */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-indigo-950/60 via-slate-900 to-slate-900 border border-indigo-500/30 p-6 rounded-3xl shadow-xl relative overflow-hidden">
-        <div className="space-y-1 z-10">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-semibold border border-indigo-500/30 mb-1">
-            <Sparkles className="w-3.5 h-3.5 text-indigo-400 animate-pulse" />
-            <span>Digital Twin Active State</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-            Welcome back, {user?.name || 'Student'}
-          </h1>
-          <p className="text-xs text-slate-400">
-            Overall learning mastery is <span className="text-indigo-300 font-bold">{data?.overallProgress || 0}%</span> across {data?.totalTopicsCount || 0} tracked topic(s).
-          </p>
-        </div>
-
-        <div className="flex items-center space-x-3 z-10 self-start md:self-auto">
-          <button
-            onClick={fetchDashboard}
-            className="inline-flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition-all shadow-md"
-          >
-            <RefreshCw className="w-4 h-4 text-indigo-400" />
-            <span>Sync Twin</span>
-          </button>
-        </div>
-      </div>
+      {/* 1. Header Hero Banner: Digital Twin Centerpiece */}
+      <DashboardTwinHero
+        user={user}
+        dashboardData={data}
+        onSync={fetchDashboard}
+      />
 
       {/* 2. Top Metric Cards Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {/* Overall Progress Card */}
-        <Card className="border-indigo-500/30 hover:border-indigo-500/50 transition-all">
+        <Card className="border-violet-500/30 hover:border-violet-500/50 transition-all">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Overall Progress</p>
               <h3 className="text-3xl font-black text-white mt-1">{data?.overallProgress || 0}%</h3>
               <div className="w-full bg-slate-800 h-1.5 rounded-full mt-3 overflow-hidden">
-                <div className="bg-indigo-500 h-full rounded-full transition-all duration-500" style={{ width: `${data?.overallProgress || 0}%` }} />
+                <div className="bg-gradient-to-r from-violet-500 to-fuchsia-500 h-full rounded-full transition-all duration-500" style={{ width: `${data?.overallProgress || 0}%` }} />
               </div>
             </div>
-            <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-indigo-400">
+            <div className="w-12 h-12 rounded-2xl bg-violet-500/20 border border-violet-500/40 flex items-center justify-center text-violet-400">
               <Brain className="w-6 h-6" />
             </div>
           </div>
@@ -284,17 +258,17 @@ export default function DashboardPage() {
                 <AreaChart data={data?.weeklyActivityHeatmap || []} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <defs>
                     <linearGradient id="studyTimeGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#6366f1" stopOpacity={0.4} />
-                      <stop offset="95%" stopColor="#6366f1" stopOpacity={0.0} />
+                      <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.5} />
+                      <stop offset="95%" stopColor="#d946ef" stopOpacity={0.0} />
                     </linearGradient>
                   </defs>
                   <XAxis dataKey="dayName" stroke="#64748b" fontSize={11} tickLine={false} />
                   <YAxis stroke="#64748b" fontSize={11} tickLine={false} />
                   <Tooltip
-                    contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', borderRadius: '12px', fontSize: '12px' }}
+                    contentStyle={{ backgroundColor: '#12111a', borderColor: '#3b2d54', borderRadius: '12px', fontSize: '12px' }}
                     formatter={(value) => [`${value} mins`, 'Study Time']}
                   />
-                  <Area type="monotone" dataKey="minutes" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#studyTimeGrad)" />
+                  <Area type="monotone" dataKey="minutes" stroke="#8b5cf6" strokeWidth={3} fillOpacity={1} fill="url(#studyTimeGrad)" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
