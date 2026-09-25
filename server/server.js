@@ -9,8 +9,8 @@ const app = express();
 
 // Production CORS Configuration
 const allowedOrigins = [
-  'http://localhost:5173',
-  'http://127.0.0.1:5173',
+  'https://study-twin-49tw.onrender.com',
+  'https://study-twin-r15d.vercel.app/register',
   process.env.CLIENT_URL
 ].filter(Boolean);
 
