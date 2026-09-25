@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ToastProvider } from './context/ToastContext';
+import { ThemeProvider } from './context/ThemeContext';
 import LoadingSpinner from './components/ui/LoadingSpinner';
 
 // Layouts
@@ -57,55 +58,57 @@ function PublicRoute({ children }) {
 export default function App() {
   return (
     <Router>
-      <ToastProvider>
-        <AuthProvider>
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/" element={<LandingPage />} />
-            <Route
-              path="/login"
-              element={
-                <PublicRoute>
-                  <LoginPage />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                <PublicRoute>
-                  <RegisterPage />
-                </PublicRoute>
-              }
-            />
+      <ThemeProvider>
+        <ToastProvider>
+          <AuthProvider>
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/" element={<LandingPage />} />
+              <Route
+                path="/login"
+                element={
+                  <PublicRoute>
+                    <LoginPage />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <PublicRoute>
+                    <RegisterPage />
+                  </PublicRoute>
+                }
+              />
 
-            {/* Protected Routes (Dashboard Layout) */}
-            <Route
-              element={
-                <ProtectedRoute>
-                  <DashboardLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/my-twin" element={<MyTwinPage />} />
-              <Route path="/subjects" element={<SubjectsPage />} />
-              <Route path="/topics" element={<TopicsPage />} />
-              <Route path="/sessions" element={<SessionsPage />} />
-              <Route path="/quiz" element={<QuizPage />} />
-              <Route path="/analytics" element={<AnalyticsPage />} />
-              <Route path="/planner" element={<PlannerPage />} />
-              <Route path="/simulator" element={<SimulatorPage />} />
-              <Route path="/knowledge-graph" element={<KnowledgeGraphPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/settings" element={<SettingsPage />} />
-            </Route>
+              {/* Protected Routes (Dashboard Layout) */}
+              <Route
+                element={
+                  <ProtectedRoute>
+                    <DashboardLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/my-twin" element={<MyTwinPage />} />
+                <Route path="/subjects" element={<SubjectsPage />} />
+                <Route path="/topics" element={<TopicsPage />} />
+                <Route path="/sessions" element={<SessionsPage />} />
+                <Route path="/quiz" element={<QuizPage />} />
+                <Route path="/analytics" element={<AnalyticsPage />} />
+                <Route path="/planner" element={<PlannerPage />} />
+                <Route path="/simulator" element={<SimulatorPage />} />
+                <Route path="/knowledge-graph" element={<KnowledgeGraphPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/settings" element={<SettingsPage />} />
+              </Route>
 
-            {/* Fallback Catch-all */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </AuthProvider>
-      </ToastProvider>
+              {/* Fallback Catch-all */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </AuthProvider>
+        </ToastProvider>
+      </ThemeProvider>
     </Router>
   );
 }

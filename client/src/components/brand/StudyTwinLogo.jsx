@@ -165,16 +165,16 @@ export default function StudyTwinLogo({
 
       <div className="flex flex-col justify-center">
         <div className="flex items-center space-x-1.5">
-          <span className={`font-black tracking-tight text-white font-sans ${currentSize.text}`}>
-            Study<span className="bg-gradient-to-r from-violet-400 via-fuchsia-400 to-amber-300 bg-clip-text text-transparent">Twin</span>
+          <span className={`font-black tracking-tight text-slate-100 dark:text-white light:text-slate-900 font-sans ${currentSize.text}`}>
+            Study<span className="bg-gradient-to-r from-teal-400 via-fuchsia-400 to-amber-400 bg-clip-text text-transparent">Twin</span>
           </span>
-          <span className="px-2 py-0.5 rounded-md bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-extrabold text-[10px] tracking-wider uppercase shadow-md shadow-violet-600/30">
+          <span className="px-2 py-0.5 rounded-md bg-gradient-to-r from-teal-500 via-purple-600 to-pink-600 text-white font-extrabold text-[10px] tracking-wider uppercase shadow-md shadow-teal-500/25">
             AI
           </span>
         </div>
 
         {(showTagline || variant === 'hero') && (
-          <span className={`font-medium text-slate-400 tracking-wide ${currentSize.subText}`}>
+          <span className={`font-semibold text-slate-400 dark:text-slate-400 light:text-slate-600 tracking-wide ${currentSize.subText}`}>
             Your AI Learning Twin
           </span>
         )}

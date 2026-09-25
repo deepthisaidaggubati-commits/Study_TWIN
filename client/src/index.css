@@ -3,8 +3,14 @@
 @tailwind utilities;
 
 @layer base {
+  html.dark body {
+    @apply bg-slate-950 text-slate-100 font-sans min-h-screen selection:bg-teal-500 selection:text-white;
+  }
+  html.light body {
+    @apply bg-[#FFFDF7] text-slate-900 font-sans min-h-screen selection:bg-teal-600 selection:text-white;
+  }
   body {
-    @apply bg-slate-950 text-slate-100 font-sans min-h-screen selection:bg-violet-600 selection:text-white;
+    @apply bg-slate-950 text-slate-100 font-sans min-h-screen selection:bg-teal-500 selection:text-white;
   }
 }
 
@@ -14,23 +20,32 @@
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #08080d;
+  background: #070812;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1f1b2e;
+  background: #18223c;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3b2d54;
+  background: #18c5c0;
 }
 
-/* Keyframes for StudyTwin AI Animated Digital Twin */
+/* Keyframe Animations for StudyTwin AI Digital Twin */
 @keyframes dash {
   from {
     stroke-dashoffset: 24;
   }
   to {
     stroke-dashoffset: 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1.5deg);
   }
 }
 
