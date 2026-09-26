@@ -5,6 +5,54 @@ const Topic = require('../models/Topic');
 const Subject = require('../models/Subject');
 const Recommendation = require('../models/Recommendation');
 
+const generateQuestionsForTopic = (topicName, description, difficulty) => {
+  const name = topicName || 'General Concept';
+  const desc = description || 'core subject material';
+  const diff = difficulty || 3;
+
+  return [
+    {
+      question: `What is the primary core objective when studying ${name}?`,
+      options: [
+        `To master fundamental principles of ${name} and apply them to problem solving`,
+        `To memorize definitions without practical execution`,
+        `To bypass prerequisite concepts in ${desc}`,
+        `To avoid testing retention and performance`
+      ],
+      correctAnswer: 0,
+      explanation: `Understanding core principles of ${name} enables higher-order synthesis and long-term retention.`,
+      difficulty: Math.max(1, diff - 1),
+      conceptTag: 'Core Concept'
+    },
+    {
+      question: `Which key characteristic is most critical when evaluating ${name}?`,
+      options: [
+        `System performance, edge case handling, and structural efficiency`,
+        `Arbitrary execution order without verification`,
+        `Ignoring time and space constraints`,
+        `Static hardcoded logic without adaptability`
+      ],
+      correctAnswer: 0,
+      explanation: `Evaluation of ${name} relies on assessing efficiency, constraints, and correctness under dynamic conditions.`,
+      difficulty: diff,
+      conceptTag: 'Optimization & Analysis'
+    },
+    {
+      question: `When applying ${name} in practical scenarios, which design consideration is paramount?`,
+      options: [
+        `Maintaining scalability, modularity, and alignment with ${desc}`,
+        `Increasing complexity unnecessarily`,
+        `Relying on deprecated methods without testing`,
+        `Eliminating verification checks during execution`
+      ],
+      correctAnswer: 0,
+      explanation: `Practical application of ${name} requires maintaining clean modular architecture and robust verification.`,
+      difficulty: Math.min(5, diff + 1),
+      conceptTag: 'Practical Application'
+    }
+  ];
+};
+
 const getQuizzes = async (topicId, subjectId) => {
   const filter = {};
   if (topicId) filter.topicId = topicId;
@@ -12,9 +60,61 @@ const getQuizzes = async (topicId, subjectId) => {
 
   let quizzes = await Quiz.find(filter)
     .populate('subjectId', 'name')
-    .populate('topicId', 'name difficulty');
+    .populate('topicId', 'name difficulty description');
+
+  // If no quizzes exist in DB, auto-generate adaptive quizzes for existing topics in DB
+  if (quizzes.length === 0) {
+    const topicFilter = {};
+    if (topicId) topicFilter._id = topicId;
+    if (subjectId) topicFilter.subjectId = subjectId;
+
+    const topics = await Topic.find(topicFilter).populate('subjectId', 'name');
+    for (const top of topics) {
+      if (!top.subjectId) continue;
+      const questions = generateQuestionsForTopic(top.name, top.description, top.difficulty);
+      const newQuiz = await Quiz.create({
+        subjectId: top.subjectId._id,
+        topicId: top._id,
+        questions,
+        difficulty: top.difficulty || 3
+      });
+    }
+
+    // Re-query created quizzes
+    quizzes = await Quiz.find(filter)
+      .populate('subjectId', 'name')
+      .populate('topicId', 'name difficulty description');
+  }
 
   return quizzes;
+};
+
+const generateAdaptiveQuiz = async (userId, topicId) => {
+  const topic = await Topic.findById(topicId).populate('subjectId', 'name');
+  if (!topic) {
+    throw { statusCode: 404, message: 'Topic not found.' };
+  }
+
+  const mastery = await TopicMastery.findOne({ userId, topicId });
+  const currentMasteryScore = mastery?.masteryScore || 0;
+  
+  // Adapt quiz difficulty based on current student mastery
+  let adaptiveDifficulty = topic.difficulty || 3;
+  if (currentMasteryScore > 75) adaptiveDifficulty = Math.min(5, adaptiveDifficulty + 1);
+  else if (currentMasteryScore < 35) adaptiveDifficulty = Math.max(1, adaptiveDifficulty - 1);
+
+  const questions = generateQuestionsForTopic(topic.name, topic.description, adaptiveDifficulty);
+
+  const quiz = await Quiz.create({
+    subjectId: topic.subjectId._id,
+    topicId: topic._id,
+    questions,
+    difficulty: adaptiveDifficulty
+  });
+
+  return await Quiz.findById(quiz._id)
+    .populate('subjectId', 'name')
+    .populate('topicId', 'name difficulty description');
 };
 
 const getQuizById = async (quizId) => {
@@ -180,6 +280,7 @@ module.exports = {
   getQuizzes,
   getQuizById,
   createQuiz,
+  generateAdaptiveQuiz,
   submitQuizAttempt,
   getQuizHistory
 };

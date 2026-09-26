@@ -78,7 +78,7 @@ const getDashboardData = async (userId) => {
   const startOfWeek = new Date(now);
   startOfWeek.setDate(now.getDate() - now.getDay());
 
-  const todaySessions = sessions.filter(s => new Date(s.startTime) >= startOfDay);
+  const todaySessions = sessions.filter(s => new Date(s.endTime || s.startTime) >= startOfDay);
   const todayStudyTime = todaySessions.reduce((sum, s) => sum + (s.duration || 0), 0);
   const todaySessionsCount = todaySessions.length;
   const todayTopicsCount = new Set(todaySessions.map(s => s.topicId?.toString())).size;

@@ -19,7 +19,7 @@ const generateToken = (userId) => {
 };
 
 const registerUser = async (userData) => {
-  const { name, email, password, academicLevel, branch, graduationYear } = userData;
+  const { name, email, password, academicLevel, branch, graduationYear, gender } = userData;
 
   if (!name || !email || !password) {
     throw { statusCode: 400, message: 'Please provide name, email, and password.' };
@@ -43,7 +43,8 @@ const registerUser = async (userData) => {
     passwordHash,
     academicLevel: academicLevel || 'Undergraduate',
     branch: branch || 'Computer Science',
-    graduationYear: graduationYear || new Date().getFullYear() + 2
+    graduationYear: graduationYear || new Date().getFullYear() + 2,
+    gender: gender || 'neutral'
   });
 
   const token = generateToken(user._id);
@@ -57,6 +58,7 @@ const registerUser = async (userData) => {
       academicLevel: user.academicLevel,
       branch: user.branch,
       graduationYear: user.graduationYear,
+      gender: user.gender,
       createdAt: user.createdAt
     }
   };
@@ -88,6 +90,7 @@ const loginUser = async (email, password) => {
       academicLevel: user.academicLevel,
       branch: user.branch,
       graduationYear: user.graduationYear,
+      gender: user.gender,
       createdAt: user.createdAt
     }
   };
@@ -102,7 +105,7 @@ const getUserProfile = async (userId) => {
 };
 
 const updateUserProfile = async (userId, updateData) => {
-  const allowedFields = ['name', 'academicLevel', 'branch', 'graduationYear'];
+  const allowedFields = ['name', 'academicLevel', 'branch', 'graduationYear', 'gender'];
   const updates = {};
   
   allowedFields.forEach(field => {

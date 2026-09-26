@@ -3,64 +3,165 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --brand-teal: #18C5C0;
+    --brand-teal-light: #4FD7D0;
+    --brand-indigo: #22266F;
+    --brand-purple: #6A35B8;
+    --brand-magenta: #9D1985;
+    --brand-pink: #F51F62;
+    --brand-orange: #FF8500;
+    --brand-yellow: #FFD447;
+  }
+
   html.dark body {
-    @apply bg-slate-950 text-slate-100 font-sans min-h-screen selection:bg-teal-500 selection:text-white;
+    background-color: #070913;
+    color: #F1F5F9;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    min-height: 100vh;
   }
+  
   html.light body {
-    @apply bg-[#FFFDF7] text-slate-900 font-sans min-h-screen selection:bg-teal-600 selection:text-white;
+    background-color: #FFFDF8;
+    color: #0F172A;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    min-height: 100vh;
   }
+
   body {
-    @apply bg-slate-950 text-slate-100 font-sans min-h-screen selection:bg-teal-500 selection:text-white;
+    min-height: 100vh;
+    overflow-x: hidden;
   }
+}
+
+/* ----------------------------------------------------
+   TRANSPARENT GLASS UI UTILITIES (Requirement 3 & 24)
+   ---------------------------------------------------- */
+.dark .glass-panel {
+  background: rgba(15, 20, 38, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.light .glass-panel {
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 8px 32px 0 rgba(100, 116, 139, 0.12);
+}
+
+.dark .glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.light .glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.50) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 10px 30px -10px rgba(148, 163, 184, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .glass-card:hover {
+  border-color: rgba(24, 197, 192, 0.4);
+  box-shadow: 0 14px 40px -10px rgba(24, 197, 192, 0.25);
+  transform: translateY(-2px);
+}
+
+.light .glass-card:hover {
+  border-color: rgba(24, 197, 192, 0.5);
+  box-shadow: 0 14px 40px -10px rgba(24, 197, 192, 0.3);
+  transform: translateY(-2px);
+}
+
+.dark .glass-pill {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(10px);
+}
+
+.light .glass-pill {
+  background: rgba(255, 255, 255, 0.60);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px);
+}
+
+.dark .glass-input {
+  background: rgba(11, 15, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #F8FAFC;
+  backdrop-filter: blur(12px);
+}
+
+.light .glass-input {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  color: #0F172A;
+  backdrop-filter: blur(12px);
+}
+
+.dark .glass-input:focus {
+  border-color: #18C5C0;
+  box-shadow: 0 0 0 3px rgba(24, 197, 192, 0.2);
+}
+
+.light .glass-input:focus {
+  border-color: #18C5C0;
+  box-shadow: 0 0 0 3px rgba(24, 197, 192, 0.25);
 }
 
 /* Custom Futuristic Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #070812;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #18223c;
-  border-radius: 4px;
+  background: rgba(100, 116, 139, 0.3);
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #18c5c0;
+  background: #18C5C0;
 }
 
-/* Keyframe Animations for StudyTwin AI Digital Twin */
+/* Dynamic Keyframe Animations */
 @keyframes dash {
-  from {
-    stroke-dashoffset: 24;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
+  from { stroke-dashoffset: 24; }
+  to { stroke-dashoffset: 0; }
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-8px) rotate(1.5deg);
-  }
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-7px) rotate(1deg); }
 }
 
 @keyframes twinGlowPulse {
-  0%, 100% {
-    opacity: 0.4;
-    transform: scale(0.98);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.02);
-  }
+  0%, 100% { opacity: 0.45; transform: scale(0.97); }
+  50% { opacity: 0.85; transform: scale(1.03); }
 }
 
-/* Respect Reduced Motion Settings */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Accessibility: Respect Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;

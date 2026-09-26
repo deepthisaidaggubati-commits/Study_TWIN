@@ -32,6 +32,11 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     default: new Date().getFullYear() + 2
   },
+  gender: {
+    type: String,
+    enum: ['female', 'male', 'neutral'],
+    default: 'neutral'
+  },
   createdAt: {
     type: Date,
     default: Date.now

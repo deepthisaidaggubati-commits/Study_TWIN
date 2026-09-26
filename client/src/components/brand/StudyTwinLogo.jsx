@@ -1,10 +1,9 @@
 import React from 'react';
 
 /**
- * StudyTwin AI - Original Brand Logo & Visual Identity Component
- * 
- * Concept: Human Silhouette (Left) + Digital Twin Neural Network / Graph (Right)
- * Palette: Charcoal (#08080D) + Violet (#8B5CF6) + Purple (#A855F7) + Magenta (#D946EF) + Gold/Orange (#F59E0B/#F97316) + Teal (#14B8A6)
+ * StudyTwin AI - Original Upgraded Brand Logo (Requirement 22)
+ * Concept: Human Silhouette + Digital Twin + Neural Graph + Learning Network
+ * Color Palette: Teal (#18C5C0), Purple (#6A35B8), Magenta (#9D1985), Yellow (#FFD447), Orange (#FF8500)
  */
 export default function StudyTwinLogo({
   variant = 'full', // 'full' | 'compact' | 'favicon' | 'hero'
@@ -25,132 +24,113 @@ export default function StudyTwinLogo({
 
   const SymbolSVG = (
     <div className={`relative flex items-center justify-center flex-shrink-0 ${currentSize.symbol} ${className}`}>
-      {/* Ambient background aura for hero/lg variants */}
-      {(variant === 'hero' || size === 'xl' || size === 'lg') && (
-        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-violet-600/30 via-fuchsia-500/20 to-amber-500/20 blur-xl animate-pulse -z-10" />
-      )}
-
       <svg
         viewBox="0 0 120 120"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full drop-shadow-[0_4px_16px_rgba(139,92,246,0.4)]"
+        className="w-full h-full drop-shadow-[0_4px_20px_rgba(24,197,192,0.4)]"
         aria-label="StudyTwin AI Logo Symbol"
       >
         <defs>
-          {/* Gradients */}
-          <linearGradient id="stHumanGrad" x1="10" y1="20" x2="50" y2="100" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#F59E0B" />
-            <stop offset="100%" stopColor="#F97316" />
+          {/* Brand Palette Gradients */}
+          <linearGradient id="humanGrad" x1="10" y1="20" x2="50" y2="100" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#FFD447" />
+            <stop offset="100%" stopColor="#FF8500" />
           </linearGradient>
 
-          <linearGradient id="stTwinGrad" x1="60" y1="20" x2="110" y2="100" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#A855F7" />
-            <stop offset="50%" stopColor="#D946EF" />
-            <stop offset="100%" stopColor="#14B8A6" />
+          <linearGradient id="twinGrad" x1="60" y1="20" x2="110" y2="100" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#18C5C0" />
+            <stop offset="50%" stopColor="#6A35B8" />
+            <stop offset="100%" stopColor="#9D1985" />
           </linearGradient>
 
-          <linearGradient id="stGraphGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#F59E0B" />
-            <stop offset="50%" stopColor="#D946EF" />
-            <stop offset="100%" stopColor="#38BDF8" />
+          <linearGradient id="streamGrad" x1="0" y1="0" x2="120" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#FFD447" />
+            <stop offset="35%" stopColor="#FF8500" />
+            <stop offset="70%" stopColor="#18C5C0" />
+            <stop offset="100%" stopColor="#9D1985" />
           </linearGradient>
 
-          <linearGradient id="stRingGrad" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.8" />
-            <stop offset="50%" stopColor="#EC4899" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#F59E0B" stopOpacity="0.8" />
-          </linearGradient>
-
-          {/* Glow filter */}
-          <filter id="stGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="2.5" result="blur" />
+          <filter id="logoGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
           </filter>
         </defs>
 
-        {/* Outer Circular Transformation Ring */}
+        {/* Orbiting Learning Network Ring */}
         <circle
           cx="60"
           cy="60"
           r="54"
-          stroke="url(#stRingGrad)"
+          stroke="url(#streamGrad)"
           strokeWidth="2.5"
-          strokeDasharray="8 6 16 6"
-          className={animated ? 'animate-[spin_40s_linear_infinite] origin-center' : ''}
-          opacity="0.75"
+          strokeDasharray="10 6 18 6"
+          className={animated ? 'animate-[spin_25s_linear_infinite] origin-center' : ''}
+          opacity="0.8"
         />
 
-        {/* --- LEFT SIDE: HUMAN PROFILE SILHOUETTE --- */}
+        {/* 1. Human Profile Silhouette (Left) */}
         <path
           d="M 46 32 C 34 32, 26 40, 26 52 C 26 62, 34 68, 42 70 C 34 74, 24 82, 22 96 H 48 L 48 84 C 48 76, 52 70, 52 60 C 52 48, 52 32, 46 32 Z"
-          fill="url(#stHumanGrad)"
+          fill="url(#humanGrad)"
           opacity="0.95"
         />
-        {/* Human Eye/Mind Identity Spark */}
         <circle cx="41" cy="46" r="3.5" fill="#FFF" opacity="0.9" />
 
-        {/* --- CENTER: TRANSFORMATION DATA STREAM & PARTICLES --- */}
+        {/* 2. Neural Data Stream & Flow Particles (Middle) */}
         <path
           d="M 44 46 Q 56 36 68 46 M 46 60 H 72 M 44 74 Q 58 84 72 74"
-          stroke="url(#stGraphGrad)"
+          stroke="url(#streamGrad)"
           strokeWidth="2.5"
           strokeLinecap="round"
           strokeDasharray="4 4"
           className={animated ? 'animate-[dash_3s_linear_infinite]' : ''}
         />
 
-        {/* Flow Particles */}
         {animated && (
           <>
-            <circle cx="52" cy="46" r="2" fill="#F59E0B" className="animate-ping" opacity="0.8" />
-            <circle cx="60" cy="60" r="2.5" fill="#D946EF" className="animate-pulse" />
-            <circle cx="66" cy="74" r="2" fill="#14B8A6" className="animate-ping" opacity="0.8" />
+            <circle cx="52" cy="46" r="2.5" fill="#FFD447" className="animate-ping" opacity="0.9" />
+            <circle cx="60" cy="60" r="3" fill="#18C5C0" className="animate-pulse" />
+            <circle cx="66" cy="74" r="2.5" fill="#9D1985" className="animate-ping" opacity="0.9" />
           </>
         )}
 
-        {/* --- RIGHT SIDE: DIGITAL TWIN NEURAL PROFILE --- */}
-        {/* Abstract Digital Profile Mesh */}
+        {/* 3. Digital Twin Neural Mesh (Right) */}
         <path
           d="M 72 32 C 84 32, 94 40, 94 52 C 94 62, 86 68, 78 70 C 86 74, 96 82, 98 96 H 72 L 72 84 C 72 76, 68 70, 68 60 C 68 48, 68 32, 72 32 Z"
-          fill="url(#stTwinGrad)"
+          fill="url(#twinGrad)"
           opacity="0.35"
         />
 
         {/* Neural Circuit Lines */}
-        <g stroke="url(#stTwinGrad)" strokeWidth="2" strokeLinecap="round">
+        <g stroke="url(#twinGrad)" strokeWidth="2" strokeLinecap="round">
           <line x1="72" y1="36" x2="88" y2="42" />
           <line x1="88" y1="42" x2="94" y2="54" />
           <line x1="88" y1="42" x2="76" y2="52" />
           <line x1="76" y1="52" x2="86" y2="68" />
           <line x1="86" y1="68" x2="96" y2="82" />
-          <line x1="76" y1="52" x2="68" y2="66" />
-          <line x1="68" y1="66" x2="78" y2="88" />
         </g>
 
-        {/* Illuminated Neural Network Nodes */}
-        <g filter="url(#stGlow)">
-          <circle cx="72" cy="36" r="3.5" fill="#A855F7" className={animated ? 'animate-pulse' : ''} />
-          <circle cx="88" cy="42" r="4" fill="#D946EF" className={animated ? 'animate-bounce' : ''} />
-          <circle cx="94" cy="54" r="3.5" fill="#EC4899" />
-          <circle cx="76" cy="52" r="4.5" fill="#38BDF8" className={animated ? 'animate-pulse' : ''} />
-          <circle cx="86" cy="68" r="4" fill="#14B8A6" />
-          <circle cx="96" cy="82" r="3" fill="#F59E0B" />
-          <circle cx="68" cy="66" r="3.5" fill="#D946EF" />
-          <circle cx="78" cy="88" r="4" fill="#A855F7" className={animated ? 'animate-pulse' : ''} />
+        {/* Glowing Neural Network Nodes */}
+        <g filter="url(#logoGlow)">
+          <circle cx="72" cy="36" r="3.5" fill="#6A35B8" className={animated ? 'animate-pulse' : ''} />
+          <circle cx="88" cy="42" r="4" fill="#9D1985" />
+          <circle cx="94" cy="54" r="3.5" fill="#F51F62" />
+          <circle cx="76" cy="52" r="4.5" fill="#18C5C0" className={animated ? 'animate-pulse' : ''} />
+          <circle cx="86" cy="68" r="4" fill="#FF8500" />
+          <circle cx="96" cy="82" r="3.5" fill="#FFD447" />
         </g>
 
-        {/* RISING LEARNING TREND GRAPH INSIDE TWIN */}
+        {/* Rising Learning Mastery Curve */}
         <path
           d="M 30 84 Q 50 82, 65 65 T 100 38"
-          stroke="url(#stGraphGrad)"
+          stroke="url(#streamGrad)"
           strokeWidth="3.5"
           strokeLinecap="round"
           fill="none"
-          filter="url(#stGlow)"
+          filter="url(#logoGlow)"
         />
-        <circle cx="100" cy="38" r="4.5" fill="#FFF" className={animated ? 'animate-ping' : ''} />
-        <circle cx="100" cy="38" r="3" fill="#F59E0B" />
+        <circle cx="100" cy="38" r="4" fill="#FFF" className={animated ? 'animate-ping' : ''} />
       </svg>
     </div>
   );
@@ -165,8 +145,8 @@ export default function StudyTwinLogo({
 
       <div className="flex flex-col justify-center">
         <div className="flex items-center space-x-1.5">
-          <span className={`font-black tracking-tight text-slate-100 dark:text-white light:text-slate-900 font-sans ${currentSize.text}`}>
-            Study<span className="bg-gradient-to-r from-teal-400 via-fuchsia-400 to-amber-400 bg-clip-text text-transparent">Twin</span>
+          <span className={`font-black tracking-tight text-slate-900 dark:text-white font-sans ${currentSize.text}`}>
+            Study<span className="bg-gradient-to-r from-teal-400 via-purple-400 to-pink-500 bg-clip-text text-transparent">Twin</span>
           </span>
           <span className="px-2 py-0.5 rounded-md bg-gradient-to-r from-teal-500 via-purple-600 to-pink-600 text-white font-extrabold text-[10px] tracking-wider uppercase shadow-md shadow-teal-500/25">
             AI
@@ -174,8 +154,8 @@ export default function StudyTwinLogo({
         </div>
 
         {(showTagline || variant === 'hero') && (
-          <span className={`font-semibold text-slate-400 dark:text-slate-400 light:text-slate-600 tracking-wide ${currentSize.subText}`}>
-            Your AI Learning Twin
+          <span className={`font-semibold text-slate-500 dark:text-slate-400 tracking-wide ${currentSize.subText}`}>
+            Personal Digital Twin Engine
           </span>
         )}
       </div>

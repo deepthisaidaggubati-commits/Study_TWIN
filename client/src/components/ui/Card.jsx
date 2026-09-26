@@ -1,13 +1,29 @@
 import React from 'react';
 
-export default function Card({ children, className = '', title, subtitle, headerAction }) {
+/**
+ * Card - Glassmorphic Transparent Floating Container
+ * Uses requirement 3 glass surfaces, soft glows, floating composition over background.
+ */
+export default function Card({ children, className = '', title, subtitle, headerAction, hover = true }) {
   return (
-    <div className={`bg-slate-900/80 dark:bg-slate-900/80 light:bg-white/90 border border-slate-800/80 dark:border-slate-800/80 light:border-amber-200/80 backdrop-blur-md rounded-2xl p-6 shadow-xl dark:shadow-2xl light:shadow-md transition-all duration-300 ${className}`}>
+    <div
+      className={`glass-card rounded-2xl p-5 sm:p-6 relative overflow-hidden transition-all duration-300 ${
+        hover ? 'hover:-translate-y-1' : ''
+      } ${className}`}
+    >
       {(title || subtitle || headerAction) && (
-        <div className="flex items-center justify-between mb-5 pb-3 border-b border-slate-800/60 dark:border-slate-800/60 light:border-amber-200/60">
+        <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-200/20 dark:border-slate-700/30">
           <div>
-            {title && <h3 className="text-lg font-bold text-slate-100 dark:text-white light:text-slate-900 tracking-tight">{title}</h3>}
-            {subtitle && <p className="text-xs text-slate-400 dark:text-slate-400 light:text-slate-600 mt-0.5">{subtitle}</p>}
+            {title && (
+              <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                {title}
+              </h3>
+            )}
+            {subtitle && (
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-normal">
+                {subtitle}
+              </p>
+            )}
           </div>
           {headerAction && <div>{headerAction}</div>}
         </div>

@@ -117,7 +117,7 @@ const getStudyAnalytics = async (userId) => {
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
 
   const todayMinutes = sessions
-    .filter(s => new Date(s.startTime) >= startOfDay)
+    .filter(s => new Date(s.endTime || s.startTime) >= startOfDay)
     .reduce((sum, s) => sum + (s.duration || 0), 0);
 
   const weeklyMinutes = sessions

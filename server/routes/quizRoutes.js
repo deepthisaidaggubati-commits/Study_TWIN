@@ -7,6 +7,7 @@ router.use(protect);
 
 router.get('/', quizController.getQuizzes);
 router.post('/', quizController.createQuiz);
+router.post('/generate', quizController.generateAdaptiveQuiz);
 router.get('/history', quizController.getQuizHistory);
 router.get('/:id', quizController.getQuizById);
 router.post('/:id/attempt', quizController.submitQuizAttempt);

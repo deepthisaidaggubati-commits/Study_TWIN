@@ -7,6 +7,7 @@ router.use(protect);
 
 router.get('/', studySessionController.getSessions);
 router.post('/', studySessionController.createSession);
+router.get('/stats', studySessionController.getStudyAnalytics);
 router.get('/analytics', studySessionController.getStudyAnalytics);
 router.get('/:id', studySessionController.getSessionById);
 router.delete('/:id', studySessionController.deleteSession);

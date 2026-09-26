@@ -47,10 +47,21 @@ const getQuizHistory = async (req, res, next) => {
   }
 };
 
+const generateAdaptiveQuiz = async (req, res, next) => {
+  try {
+    const { topicId } = req.body;
+    const quiz = await quizService.generateAdaptiveQuiz(req.user._id, topicId);
+    res.status(201).json({ success: true, message: 'Adaptive quiz prepared by your Digital Twin', data: quiz });
+  } catch (error) {
+    res.status(error.statusCode || 500).json({ success: false, message: error.message || 'Error generating adaptive quiz' });
+  }
+};
+
 module.exports = {
   getQuizzes,
   getQuizById,
   createQuiz,
+  generateAdaptiveQuiz,
   submitQuizAttempt,
   getQuizHistory
 };
