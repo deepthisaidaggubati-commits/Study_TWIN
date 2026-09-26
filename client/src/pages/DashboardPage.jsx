@@ -12,17 +12,12 @@ import {
   Flame,
   Clock,
   AlertTriangle,
-  Sparkles,
   RefreshCw,
   BookOpen,
   Layers,
   HelpCircle,
   Calendar,
   ArrowRight,
-  TrendingUp,
-  CheckCircle2,
-  AlertCircle,
-  PlusCircle,
   Info
 } from 'lucide-react';
 
@@ -30,14 +25,9 @@ import {
   ResponsiveContainer,
   AreaChart,
   Area,
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
-  Tooltip,
-  PieChart,
-  Pie,
-  Cell
+  Tooltip
 } from 'recharts';
 
 export default function DashboardPage() {
@@ -67,28 +57,15 @@ export default function DashboardPage() {
   }, []);
 
   if (loading) {
-    return (
-      <div className="space-y-6 animate-pulse p-2">
-        <div className="h-44 bg-slate-900 rounded-3xl border border-slate-800" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {[1, 2, 3, 4].map(i => (
-            <div key={i} className="h-28 bg-slate-900 rounded-2xl border border-slate-800" />
-          ))}
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 h-72 bg-slate-900 rounded-2xl border border-slate-800" />
-          <div className="h-72 bg-slate-900 rounded-2xl border border-slate-800" />
-        </div>
-      </div>
-    );
+    return <LoadingSpinner label="Connecting to Digital Twin Intelligence Matrix..." />;
   }
 
   if (error) {
     return (
-      <div className="p-8 bg-rose-950/40 border border-rose-800/60 rounded-3xl text-center space-y-4 max-w-xl mx-auto my-12 shadow-2xl">
+      <div className="p-8 glass-panel border border-rose-500/40 rounded-3xl text-center space-y-4 max-w-xl mx-auto my-12 shadow-2xl">
         <AlertTriangle className="w-12 h-12 text-rose-400 mx-auto" />
-        <h3 className="text-xl font-bold text-white">Dashboard Connection Error</h3>
-        <p className="text-xs text-rose-300 leading-relaxed">{error}</p>
+        <h3 className="text-xl font-bold text-slate-900 dark:text-white">Dashboard Connection Error</h3>
+        <p className="text-xs text-rose-400 leading-relaxed">{error}</p>
         <Button variant="primary" size="md" onClick={fetchDashboard} className="space-x-2">
           <RefreshCw className="w-4 h-4" />
           <span>Retry Loading Dashboard</span>
@@ -97,77 +74,78 @@ export default function DashboardPage() {
     );
   }
 
-  const isNewUser = (data?.totalTopicsCount || 0) === 0;
-
   return (
     <div className="space-y-8">
-      {/* 1. Header Hero Banner: Digital Twin Centerpiece */}
+      {/* 1. Dashboard Hero Banner (Green -> Lime -> Yellow) */}
       <DashboardTwinHero
         user={user}
         dashboardData={data}
         onSync={fetchDashboard}
       />
 
-      {/* 2. Top Metric Cards Row */}
+      {/* 2. Top Metric Cards Row (Green -> Lime -> Yellow) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {/* Overall Progress Card */}
-        <Card className="border-violet-500/30 hover:border-violet-500/50 transition-all">
+        <Card className="border-[#63C63D]/30 hover:border-[#63C63D]/60 transition-all">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Overall Progress</p>
-              <h3 className="text-3xl font-black text-white mt-1">{data?.overallProgress || 0}%</h3>
-              <div className="w-full bg-slate-800 h-1.5 rounded-full mt-3 overflow-hidden">
-                <div className="bg-gradient-to-r from-violet-500 to-fuchsia-500 h-full rounded-full transition-all duration-500" style={{ width: `${data?.overallProgress || 0}%` }} />
+              <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Overall Progress</p>
+              <h3 className="text-3xl font-black text-slate-900 dark:text-white mt-1">{data?.overallProgress || 0}%</h3>
+              <div className="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full mt-3 overflow-hidden">
+                <div
+                  className="bg-gradient-to-r from-[#168F3B] via-[#63C63D] to-[#B7E51D] h-full rounded-full transition-all duration-500"
+                  style={{ width: `${data?.overallProgress || 0}%` }}
+                />
               </div>
             </div>
-            <div className="w-12 h-12 rounded-2xl bg-violet-500/20 border border-violet-500/40 flex items-center justify-center text-violet-400">
+            <div className="w-12 h-12 rounded-2xl bg-[#63C63D]/20 border border-[#63C63D]/40 flex items-center justify-center text-[#36A852] dark:text-[#B7E51D]">
               <Brain className="w-6 h-6" />
             </div>
           </div>
         </Card>
 
         {/* Estimated Exam Readiness Card */}
-        <Card className="border-violet-500/30 hover:border-violet-500/50 transition-all">
+        <Card className="border-[#B7E51D]/30 hover:border-[#B7E51D]/60 transition-all">
           <div className="flex items-center justify-between">
             <div>
               <div className="flex items-center space-x-1">
-                <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Estimated Readiness</p>
-                <span className="text-[10px] text-violet-400 bg-violet-500/20 px-1.5 py-0.5 rounded font-bold">Model</span>
+                <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Exam Readiness</p>
+                <span className="text-[10px] text-slate-950 font-black bg-[#B7E51D] px-1.5 py-0.5 rounded">AI Engine</span>
               </div>
-              <h3 className="text-3xl font-black text-white mt-1">{data?.examReadiness || 0}%</h3>
-              <p className="text-[10px] text-slate-400 mt-2">Estimated readiness metric</p>
+              <h3 className="text-3xl font-black text-slate-900 dark:text-white mt-1">{data?.examReadiness || 0}%</h3>
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-2 font-semibold">Heuristic Readiness Model</p>
             </div>
-            <div className="w-12 h-12 rounded-2xl bg-violet-500/20 border border-violet-500/40 flex items-center justify-center text-violet-400">
+            <div className="w-12 h-12 rounded-2xl bg-[#B7E51D]/20 border border-[#B7E51D]/40 flex items-center justify-center text-[#63C63D] dark:text-[#B7E51D]">
               <Target className="w-6 h-6" />
             </div>
           </div>
         </Card>
 
         {/* Study Streak Card */}
-        <Card className="border-amber-500/30 hover:border-amber-500/50 transition-all">
+        <Card className="border-[#FFD900]/30 hover:border-[#FFD900]/60 transition-all">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Current Streak</p>
-              <h3 className="text-3xl font-black text-white mt-1">{data?.currentStreak || 0} Days</h3>
-              <p className="text-[10px] text-amber-400 font-semibold mt-2">Active Learning Momentum</p>
+              <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Current Streak</p>
+              <h3 className="text-3xl font-black text-slate-900 dark:text-white mt-1">{data?.currentStreak || 0} Days</h3>
+              <p className="text-[10px] text-[#FFD900] font-extrabold mt-2">Active Learning Momentum</p>
             </div>
-            <div className="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400">
+            <div className="w-12 h-12 rounded-2xl bg-[#FFD900]/20 border border-[#FFD900]/40 flex items-center justify-center text-[#FFD900]">
               <Flame className="w-6 h-6" />
             </div>
           </div>
         </Card>
 
         {/* Today's Study Activity Card */}
-        <Card className="border-emerald-500/30 hover:border-emerald-500/50 transition-all">
+        <Card className="border-[#168F3B]/30 hover:border-[#168F3B]/60 transition-all">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Today's Activity</p>
-              <h3 className="text-3xl font-black text-white mt-1">{data?.todayStudyTime || 0} mins</h3>
-              <p className="text-[10px] text-slate-400 mt-2">
+              <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Today's Activity</p>
+              <h3 className="text-3xl font-black text-slate-900 dark:text-white mt-1">{data?.todayStudyTime || 0} mins</h3>
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-2 font-medium">
                 {data?.todaySessionsCount || 0} session(s) • {data?.todayTopicsCount || 0} topic(s)
               </p>
             </div>
-            <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+            <div className="w-12 h-12 rounded-2xl bg-[#168F3B]/20 border border-[#168F3B]/40 flex items-center justify-center text-[#36A852] dark:text-[#63C63D]">
               <Clock className="w-6 h-6" />
             </div>
           </div>
@@ -175,62 +153,62 @@ export default function DashboardPage() {
       </div>
 
       {/* 3. Quick Action Buttons Bar */}
-      <Card title="Quick Actions" subtitle="Navigate directly to key workflow modules">
+      <Card title="Quick Actions" subtitle="Direct access to core Twin learning workflows">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          <Button variant="secondary" size="sm" onClick={() => navigate('/sessions')} className="w-full flex flex-col py-3 space-y-1.5 border border-slate-700 hover:border-indigo-500">
-            <Clock className="w-4 h-4 text-indigo-400" />
-            <span className="text-xs font-semibold">Start Session</span>
+          <Button variant="secondary" size="sm" onClick={() => navigate('/sessions')} className="w-full flex flex-col py-3 space-y-1.5 border border-[#63C63D]/30 hover:border-[#63C63D]">
+            <Clock className="w-4 h-4 text-[#36A852] dark:text-[#63C63D]" />
+            <span className="text-xs font-bold">Start Session</span>
           </Button>
 
-          <Button variant="secondary" size="sm" onClick={() => navigate('/quiz')} className="w-full flex flex-col py-3 space-y-1.5 border border-slate-700 hover:border-violet-500">
-            <HelpCircle className="w-4 h-4 text-violet-400" />
-            <span className="text-xs font-semibold">Take Quiz</span>
+          <Button variant="secondary" size="sm" onClick={() => navigate('/quiz')} className="w-full flex flex-col py-3 space-y-1.5 border border-[#B7E51D]/30 hover:border-[#B7E51D]">
+            <HelpCircle className="w-4 h-4 text-[#B7E51D]" />
+            <span className="text-xs font-bold">Take Quiz</span>
           </Button>
 
-          <Button variant="secondary" size="sm" onClick={() => navigate('/subjects')} className="w-full flex flex-col py-3 space-y-1.5 border border-slate-700 hover:border-emerald-500">
-            <BookOpen className="w-4 h-4 text-emerald-400" />
-            <span className="text-xs font-semibold">Add Subject</span>
+          <Button variant="secondary" size="sm" onClick={() => navigate('/subjects')} className="w-full flex flex-col py-3 space-y-1.5 border border-[#63C63D]/30 hover:border-[#63C63D]">
+            <BookOpen className="w-4 h-4 text-[#36A852] dark:text-[#63C63D]" />
+            <span className="text-xs font-bold">Add Subject</span>
           </Button>
 
-          <Button variant="secondary" size="sm" onClick={() => navigate('/topics')} className="w-full flex flex-col py-3 space-y-1.5 border border-slate-700 hover:border-amber-500">
-            <Layers className="w-4 h-4 text-amber-400" />
-            <span className="text-xs font-semibold">Add Topic</span>
+          <Button variant="secondary" size="sm" onClick={() => navigate('/topics')} className="w-full flex flex-col py-3 space-y-1.5 border border-[#FFD900]/30 hover:border-[#FFD900]">
+            <Layers className="w-4 h-4 text-[#FFD900]" />
+            <span className="text-xs font-bold">Add Topic</span>
           </Button>
 
-          <Button variant="secondary" size="sm" onClick={() => navigate('/planner')} className="w-full flex flex-col py-3 space-y-1.5 border border-slate-700 hover:border-pink-500">
-            <Calendar className="w-4 h-4 text-pink-400" />
-            <span className="text-xs font-semibold">View Plan</span>
+          <Button variant="secondary" size="sm" onClick={() => navigate('/planner')} className="w-full flex flex-col py-3 space-y-1.5 border border-[#B7E51D]/30 hover:border-[#B7E51D]">
+            <Calendar className="w-4 h-4 text-[#B7E51D]" />
+            <span className="text-xs font-bold">View Plan</span>
           </Button>
 
-          <Button variant="secondary" size="sm" onClick={() => navigate('/my-twin')} className="w-full flex flex-col py-3 space-y-1.5 border border-slate-700 hover:border-cyan-500">
-            <Brain className="w-4 h-4 text-cyan-400" />
-            <span className="text-xs font-semibold">View My Twin</span>
+          <Button variant="secondary" size="sm" onClick={() => navigate('/my-twin')} className="w-full flex flex-col py-3 space-y-1.5 border border-[#63C63D]/30 hover:border-[#63C63D]">
+            <Brain className="w-4 h-4 text-[#63C63D]" />
+            <span className="text-xs font-bold">View My Twin</span>
           </Button>
         </div>
       </Card>
 
-      {/* 4. AI Recommendation Banner (Prominent "Recommended Next") */}
+      {/* 4. AI Recommendation Banner (Green -> Lime -> Yellow) */}
       <Card title="Recommended Next Activity" subtitle="Engine recommendation derived from forgetting risk, mastery & accuracy">
         {data?.recommendedNextActivity ? (
-          <div className="p-6 bg-gradient-to-r from-indigo-950/80 via-slate-900 to-slate-900 border border-indigo-500/40 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xl">
+          <div className="p-6 rounded-2xl glass-card border border-[#63C63D]/40 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xl">
             <div className="space-y-2 max-w-2xl">
               <div className="flex items-center space-x-2">
-                <span className="text-xs font-extrabold uppercase px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">
+                <span className="text-xs font-black uppercase px-3 py-1 rounded-full bg-[#168F3B]/20 text-[#168F3B] dark:text-[#B7E51D] border border-[#63C63D]/40">
                   {data.recommendedNextActivity.recommendationType}
                 </span>
-                <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-[#FFD900]/20 text-[#FFD900] border border-[#FFD900]/40">
                   Priority: {data.recommendedNextActivity.priority}
                 </span>
               </div>
 
-              <h3 className="text-xl font-bold text-white">{data.recommendedNextActivity.topicName}</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">{data.recommendedNextActivity.reason}</p>
+              <h3 className="text-xl font-extrabold text-slate-900 dark:text-white">{data.recommendedNextActivity.topicName}</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">{data.recommendedNextActivity.reason}</p>
             </div>
 
             <div className="flex items-center space-x-4 self-end md:self-auto flex-shrink-0">
               <div className="text-right">
-                <p className="text-[10px] text-slate-400 uppercase font-bold">Est. Duration</p>
-                <p className="text-base font-extrabold text-white">{data.recommendedNextActivity.estimatedDuration} mins</p>
+                <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">Est. Duration</p>
+                <p className="text-base font-black text-slate-900 dark:text-white">{data.recommendedNextActivity.estimatedDuration} mins</p>
               </div>
               <Button variant="primary" size="md" onClick={() => navigate('/sessions')} className="space-x-2">
                 <span>Start Now</span>
@@ -239,59 +217,55 @@ export default function DashboardPage() {
             </div>
           </div>
         ) : (
-          <div className="p-8 text-center bg-slate-900/40 rounded-2xl border border-slate-800 text-slate-400 text-xs space-y-2">
-            <Info className="w-6 h-6 text-indigo-400 mx-auto" />
-            <p className="font-semibold text-slate-300">No pending recommendations right now.</p>
-            <p>Add subjects, log study sessions, or take quizzes to generate recommendations!</p>
+          <div className="p-8 text-center glass-card space-y-2 text-xs">
+            <Info className="w-6 h-6 text-[#63C63D] mx-auto" />
+            <p className="font-bold text-slate-900 dark:text-white">No pending recommendations right now.</p>
+            <p className="text-slate-500 dark:text-slate-400">Add subjects, log study sessions, or take quizzes to generate recommendations!</p>
           </div>
         )}
       </Card>
 
-      {/* 5. Main 2-Column Analytics Layout */}
+      {/* 5. Analytics Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column: Weekly Chart & Topic Mastery */}
         <div className="lg:col-span-2 space-y-6">
-          {/* Weekly Study Time Analytics Chart */}
-          <Card title="Weekly Study Analytics" subtitle="7-day study minutes history from real logs">
+          <Card title="Weekly Study Analytics" subtitle="7-day study minutes history (Green -> Lime -> Yellow)">
             <div className="h-64 w-full pt-4">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={data?.weeklyActivityHeatmap || []} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <defs>
-                    <linearGradient id="studyTimeGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.5} />
-                      <stop offset="95%" stopColor="#d946ef" stopOpacity={0.0} />
+                    <linearGradient id="greenLimeGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#63C63D" stopOpacity={0.6} />
+                      <stop offset="95%" stopColor="#B7E51D" stopOpacity={0.0} />
                     </linearGradient>
                   </defs>
                   <XAxis dataKey="dayName" stroke="#64748b" fontSize={11} tickLine={false} />
                   <YAxis stroke="#64748b" fontSize={11} tickLine={false} />
                   <Tooltip
-                    contentStyle={{ backgroundColor: '#12111a', borderColor: '#3b2d54', borderRadius: '12px', fontSize: '12px' }}
+                    contentStyle={{ backgroundColor: '#060E08', borderColor: '#63C63D', borderRadius: '12px', fontSize: '12px', color: '#FFF' }}
                     formatter={(value) => [`${value} mins`, 'Study Time']}
                   />
-                  <Area type="monotone" dataKey="minutes" stroke="#8b5cf6" strokeWidth={3} fillOpacity={1} fill="url(#studyTimeGrad)" />
+                  <Area type="monotone" dataKey="minutes" stroke="#63C63D" strokeWidth={3} fillOpacity={1} fill="url(#greenLimeGrad)" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
           </Card>
 
-          {/* Weak Topics Section */}
+          {/* Weak Topics */}
           <Card title="Weak Topics Attention List" subtitle="Topics with mastery score < 50%">
             {data?.weakTopics?.length > 0 ? (
               <div className="space-y-3">
                 {data.weakTopics.map((item, idx) => (
-                  <div key={item.id || idx} className="p-4 bg-amber-950/20 border border-amber-800/40 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div key={item.id || idx} className="p-4 glass-card border-l-4 border-l-[#FFD900] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                       <div className="flex items-center space-x-2">
-                        <h4 className="text-sm font-bold text-white">{item.topicName}</h4>
-                        <span className="text-[10px] font-semibold text-slate-400">({item.subjectName})</span>
+                        <h4 className="text-sm font-bold text-slate-900 dark:text-white">{item.topicName}</h4>
+                        <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400">({item.subjectName})</span>
                       </div>
-                      <p className="text-xs text-amber-200/90 mt-1">{item.reason}</p>
+                      <p className="text-xs text-slate-600 dark:text-slate-300 mt-1">{item.reason}</p>
                     </div>
 
                     <div className="flex items-center space-x-3 self-end sm:self-auto">
-                      <div className="text-right">
-                        <span className="text-xs font-black text-amber-400">{item.masteryScore}% Mastery</span>
-                      </div>
+                      <span className="text-xs font-black text-[#FFD900]">{item.masteryScore}% Mastery</span>
                       <Button variant="outline" size="sm" onClick={() => navigate('/sessions')}>
                         Fix Weakness
                       </Button>
@@ -300,7 +274,7 @@ export default function DashboardPage() {
                 ))}
               </div>
             ) : (
-              <div className="p-6 text-center text-xs text-slate-400 bg-slate-900/40 rounded-xl border border-slate-800">
+              <div className="p-6 text-center text-xs text-slate-500 dark:text-slate-400 glass-card">
                 🎉 Excellent! No weak topics detected below 50% mastery.
               </div>
             )}
@@ -309,82 +283,51 @@ export default function DashboardPage() {
 
         {/* Right Column: High Risk & Upcoming Exams */}
         <div className="space-y-6">
-          {/* High Forgetting Risk Section */}
-          <Card title="High Forgetting-Risk Topics" subtitle="Topics requiring urgent memory revision">
+          <Card title="High Forgetting-Risk Topics" subtitle="Topics requiring urgent revision">
             {data?.highRiskTopics?.length > 0 ? (
               <div className="space-y-3">
                 {data.highRiskTopics.map((item, idx) => (
-                  <div key={item.id || idx} className="p-3.5 bg-rose-950/30 border border-rose-800/50 rounded-xl space-y-2">
+                  <div key={item.id || idx} className="p-3.5 glass-card border-l-4 border-l-[#FFC400] space-y-2">
                     <div className="flex justify-between items-center">
-                      <h4 className="text-xs font-bold text-white">{item.topicName}</h4>
-                      <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-white">{item.topicName}</h4>
+                      <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-[#FFD900]/20 text-[#FFD900] border border-[#FFD900]/30">
                         {item.riskCategory} Risk
                       </span>
                     </div>
 
-                    <div className="flex justify-between text-[11px] text-slate-400">
-                      <span>Mastery: <strong className="text-slate-200">{item.masteryScore}%</strong></span>
-                      <span>Forgetting Risk: <strong className="text-rose-400">{item.forgettingRisk}%</strong></span>
+                    <div className="flex justify-between text-[11px] text-slate-500 dark:text-slate-400">
+                      <span>Mastery: <strong className="text-slate-900 dark:text-white">{item.masteryScore}%</strong></span>
+                      <span>Forgetting Risk: <strong className="text-[#FFD900]">{item.forgettingRisk}%</strong></span>
                     </div>
-
-                    <p className="text-[11px] text-slate-300 bg-rose-950/50 p-2 rounded-lg font-medium border border-rose-900/40">
-                      💡 {item.recommendedAction}
-                    </p>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="p-6 text-center text-xs text-slate-500 bg-slate-900/40 rounded-xl border border-slate-800">
+              <div className="p-6 text-center text-xs text-slate-500 dark:text-slate-400 glass-card">
                 No high forgetting-risk topics detected.
               </div>
             )}
           </Card>
 
-          {/* Upcoming Exams Section */}
-          <Card title="Upcoming Exams" subtitle="Target subject exam dates">
+          {/* Upcoming Exams */}
+          <Card title="Upcoming Exams" subtitle="Target exam countdown">
             {data?.upcomingExams?.length > 0 ? (
               <div className="space-y-3">
                 {data.upcomingExams.map(e => (
-                  <div key={e.id} className="p-3.5 bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-between">
+                  <div key={e.id} className="p-3.5 glass-card flex items-center justify-between">
                     <div>
-                      <h4 className="text-xs font-bold text-white">{e.name}</h4>
-                      <p className="text-[10px] text-slate-400 mt-0.5">{new Date(e.examDate).toLocaleDateString()}</p>
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-white">{e.name}</h4>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">{new Date(e.examDate).toLocaleDateString()}</p>
                     </div>
                     <div className="text-right">
-                      <span className="text-xs font-extrabold text-indigo-400">{e.daysRemaining} days left</span>
-                      <p className={`text-[10px] font-semibold ${e.prepStatus === 'On Track' ? 'text-emerald-400' : 'text-amber-400'}`}>
-                        {e.prepStatus}
-                      </p>
+                      <span className="text-xs font-black text-[#63C63D] dark:text-[#B7E51D]">{e.daysRemaining} days left</span>
                     </div>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="p-6 text-center text-xs text-slate-500 bg-slate-900/40 rounded-xl border border-slate-800">
+              <div className="p-6 text-center text-xs text-slate-500 dark:text-slate-400 glass-card">
                 No upcoming exam dates set. Add exam dates in Subjects!
-              </div>
-            )}
-          </Card>
-
-          {/* Recent Quiz Performance */}
-          <Card title="Recent Quiz Performance" subtitle="Latest quiz scores">
-            {data?.quizPerformance?.length > 0 ? (
-              <div className="space-y-2.5">
-                {data.quizPerformance.map(q => (
-                  <div key={q.id} className="p-3 bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-between">
-                    <div>
-                      <h4 className="text-xs font-bold text-white">{q.topicName}</h4>
-                      <p className="text-[10px] text-slate-500">{new Date(q.attemptedAt).toLocaleDateString()}</p>
-                    </div>
-                    <span className={`text-xs font-black ${q.score >= 80 ? 'text-emerald-400' : q.score >= 60 ? 'text-amber-400' : 'text-rose-400'}`}>
-                      {q.score}%
-                    </span>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="p-6 text-center text-xs text-slate-500 bg-slate-900/40 rounded-xl border border-slate-800">
-                No quizzes attempted yet. Take a quiz to track performance!
               </div>
             )}
           </Card>

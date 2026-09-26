@@ -57,25 +57,25 @@ export default function RegisterPage() {
         <ThemeToggle showLabel />
       </div>
 
-      <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-8 bg-slate-900/80 dark:bg-slate-900/80 light:bg-white/90 border border-teal-500/30 dark:border-teal-500/30 light:border-amber-300/80 p-8 sm:p-10 rounded-3xl shadow-2xl backdrop-blur-xl relative z-10 items-center">
+      <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-8 glass-panel p-8 sm:p-10 rounded-3xl relative z-10 items-center">
         
         {/* Left Side: 3D Twin Teaser */}
         <div className="flex flex-col items-center text-center space-y-4">
           <StudentTwinAvatar3D size="hero" animated />
           <div className="space-y-1">
             <h3 className="text-2xl font-black text-slate-100 dark:text-white light:text-slate-900">Create your Learning Twin</h3>
-            <p className="text-xs text-slate-400 dark:text-slate-400 light:text-slate-600 leading-relaxed max-w-xs">
+            <p className="text-xs text-slate-300 dark:text-slate-300 light:text-slate-700 leading-relaxed max-w-xs">
               Your personalized digital student journey starts here.
             </p>
           </div>
         </div>
 
         {/* Right Side: Registration Form */}
-        <div className="space-y-5 border-t lg:border-t-0 lg:border-l border-slate-800 dark:border-slate-800 light:border-amber-200 pt-6 lg:pt-0 lg:pl-8">
+        <div className="space-y-5 border-t lg:border-t-0 lg:border-l border-emerald-500/20 dark:border-emerald-500/20 light:border-emerald-700/20 pt-6 lg:pt-0 lg:pl-8">
           <div className="space-y-2">
             <StudyTwinLogo variant="full" size="md" animated />
             <h2 className="text-xl font-bold text-slate-100 dark:text-white light:text-slate-900 tracking-tight pt-1">Build Your Profile</h2>
-            <p className="text-xs text-slate-400 dark:text-slate-400 light:text-slate-600">Enter details to calibrate your twin engine</p>
+            <p className="text-xs text-slate-300 dark:text-slate-300 light:text-slate-700">Enter details to calibrate your twin engine</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-3.5">
@@ -120,12 +120,12 @@ export default function RegisterPage() {
                   name="academicLevel"
                   value={formData.academicLevel}
                   onChange={handleChange}
-                  className="w-full bg-slate-900/90 dark:bg-slate-900/90 light:bg-white border border-slate-800 dark:border-slate-800 light:border-amber-200 rounded-xl px-4 py-2.5 text-sm text-slate-100 dark:text-white light:text-slate-900 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/30"
+                  className="w-full glass-input rounded-xl px-4 py-2.5 text-sm text-slate-100 dark:text-white light:text-slate-900 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-lime-400/30"
                 >
-                  <option value="High School">High School</option>
-                  <option value="Undergraduate">Undergraduate</option>
-                  <option value="Postgraduate">Postgraduate</option>
-                  <option value="Other">Other</option>
+                  <option value="High School" className="bg-slate-900 text-white">High School</option>
+                  <option value="Undergraduate" className="bg-slate-900 text-white">Undergraduate</option>
+                  <option value="Postgraduate" className="bg-slate-900 text-white">Postgraduate</option>
+                  <option value="Other" className="bg-slate-900 text-white">Other</option>
                 </select>
               </div>
 
@@ -155,9 +155,9 @@ export default function RegisterPage() {
             </Button>
           </form>
 
-          <div className="text-center pt-2 border-t border-slate-800 dark:border-slate-800 light:border-amber-200 text-xs text-slate-400 dark:text-slate-400 light:text-slate-600">
+          <div className="text-center pt-2 border-t border-emerald-500/20 dark:border-emerald-500/20 light:border-emerald-700/20 text-xs text-slate-300 dark:text-slate-300 light:text-slate-700">
             Already have a Twin?{' '}
-            <Link to="/login" className="text-teal-400 dark:text-teal-300 light:text-teal-700 font-bold hover:underline">
+            <Link to="/login" className="text-lime-400 dark:text-lime-300 light:text-emerald-800 font-bold hover:underline">
               Sign In Here
             </Link>
           </div>

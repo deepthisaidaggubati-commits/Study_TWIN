@@ -1,9 +1,9 @@
 import React from 'react';
 
 /**
- * StudyTwin AI - Original Upgraded Brand Logo (Requirement 22)
+ * StudyTwin AI - Original Brand Logo (Green -> Lime -> Yellow Palette)
  * Concept: Human Silhouette + Digital Twin + Neural Graph + Learning Network
- * Color Palette: Teal (#18C5C0), Purple (#6A35B8), Magenta (#9D1985), Yellow (#FFD447), Orange (#FF8500)
+ * Color Palette: Green (#168F3B, #36A852), Lime (#63C63D, #B7E51D), Yellow (#FFD900, #FFC400)
  */
 export default function StudyTwinLogo({
   variant = 'full', // 'full' | 'compact' | 'favicon' | 'hero'
@@ -28,27 +28,27 @@ export default function StudyTwinLogo({
         viewBox="0 0 120 120"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full drop-shadow-[0_4px_20px_rgba(24,197,192,0.4)]"
+        className="w-full h-full drop-shadow-[0_4px_20px_rgba(99,198,61,0.4)]"
         aria-label="StudyTwin AI Logo Symbol"
       >
         <defs>
-          {/* Brand Palette Gradients */}
+          {/* Green -> Lime -> Yellow Gradients */}
           <linearGradient id="humanGrad" x1="10" y1="20" x2="50" y2="100" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#FFD447" />
-            <stop offset="100%" stopColor="#FF8500" />
+            <stop offset="0%" stopColor="#B7E51D" />
+            <stop offset="100%" stopColor="#FFD900" />
           </linearGradient>
 
           <linearGradient id="twinGrad" x1="60" y1="20" x2="110" y2="100" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#18C5C0" />
-            <stop offset="50%" stopColor="#6A35B8" />
-            <stop offset="100%" stopColor="#9D1985" />
+            <stop offset="0%" stopColor="#168F3B" />
+            <stop offset="50%" stopColor="#63C63D" />
+            <stop offset="100%" stopColor="#B7E51D" />
           </linearGradient>
 
           <linearGradient id="streamGrad" x1="0" y1="0" x2="120" y2="0" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#FFD447" />
-            <stop offset="35%" stopColor="#FF8500" />
-            <stop offset="70%" stopColor="#18C5C0" />
-            <stop offset="100%" stopColor="#9D1985" />
+            <stop offset="0%" stopColor="#168F3B" />
+            <stop offset="35%" stopColor="#36A852" />
+            <stop offset="70%" stopColor="#B7E51D" />
+            <stop offset="100%" stopColor="#FFD900" />
           </linearGradient>
 
           <filter id="logoGlow" x="-20%" y="-20%" width="140%" height="140%">
@@ -66,10 +66,10 @@ export default function StudyTwinLogo({
           strokeWidth="2.5"
           strokeDasharray="10 6 18 6"
           className={animated ? 'animate-[spin_25s_linear_infinite] origin-center' : ''}
-          opacity="0.8"
+          opacity="0.85"
         />
 
-        {/* 1. Human Profile Silhouette (Left) */}
+        {/* 1. Human Profile Silhouette */}
         <path
           d="M 46 32 C 34 32, 26 40, 26 52 C 26 62, 34 68, 42 70 C 34 74, 24 82, 22 96 H 48 L 48 84 C 48 76, 52 70, 52 60 C 52 48, 52 32, 46 32 Z"
           fill="url(#humanGrad)"
@@ -77,7 +77,7 @@ export default function StudyTwinLogo({
         />
         <circle cx="41" cy="46" r="3.5" fill="#FFF" opacity="0.9" />
 
-        {/* 2. Neural Data Stream & Flow Particles (Middle) */}
+        {/* 2. Neural Data Stream & Flow Particles */}
         <path
           d="M 44 46 Q 56 36 68 46 M 46 60 H 72 M 44 74 Q 58 84 72 74"
           stroke="url(#streamGrad)"
@@ -89,13 +89,13 @@ export default function StudyTwinLogo({
 
         {animated && (
           <>
-            <circle cx="52" cy="46" r="2.5" fill="#FFD447" className="animate-ping" opacity="0.9" />
-            <circle cx="60" cy="60" r="3" fill="#18C5C0" className="animate-pulse" />
-            <circle cx="66" cy="74" r="2.5" fill="#9D1985" className="animate-ping" opacity="0.9" />
+            <circle cx="52" cy="46" r="2.5" fill="#B7E51D" className="animate-ping" opacity="0.9" />
+            <circle cx="60" cy="60" r="3" fill="#63C63D" className="animate-pulse" />
+            <circle cx="66" cy="74" r="2.5" fill="#FFD900" className="animate-ping" opacity="0.9" />
           </>
         )}
 
-        {/* 3. Digital Twin Neural Mesh (Right) */}
+        {/* 3. Digital Twin Mesh */}
         <path
           d="M 72 32 C 84 32, 94 40, 94 52 C 94 62, 86 68, 78 70 C 86 74, 96 82, 98 96 H 72 L 72 84 C 72 76, 68 70, 68 60 C 68 48, 68 32, 72 32 Z"
           fill="url(#twinGrad)"
@@ -113,12 +113,12 @@ export default function StudyTwinLogo({
 
         {/* Glowing Neural Network Nodes */}
         <g filter="url(#logoGlow)">
-          <circle cx="72" cy="36" r="3.5" fill="#6A35B8" className={animated ? 'animate-pulse' : ''} />
-          <circle cx="88" cy="42" r="4" fill="#9D1985" />
-          <circle cx="94" cy="54" r="3.5" fill="#F51F62" />
-          <circle cx="76" cy="52" r="4.5" fill="#18C5C0" className={animated ? 'animate-pulse' : ''} />
-          <circle cx="86" cy="68" r="4" fill="#FF8500" />
-          <circle cx="96" cy="82" r="3.5" fill="#FFD447" />
+          <circle cx="72" cy="36" r="3.5" fill="#168F3B" className={animated ? 'animate-pulse' : ''} />
+          <circle cx="88" cy="42" r="4" fill="#36A852" />
+          <circle cx="94" cy="54" r="3.5" fill="#63C63D" />
+          <circle cx="76" cy="52" r="4.5" fill="#B7E51D" className={animated ? 'animate-pulse' : ''} />
+          <circle cx="86" cy="68" r="4" fill="#D5F51C" />
+          <circle cx="96" cy="82" r="3.5" fill="#FFD900" />
         </g>
 
         {/* Rising Learning Mastery Curve */}
@@ -146,9 +146,9 @@ export default function StudyTwinLogo({
       <div className="flex flex-col justify-center">
         <div className="flex items-center space-x-1.5">
           <span className={`font-black tracking-tight text-slate-900 dark:text-white font-sans ${currentSize.text}`}>
-            Study<span className="bg-gradient-to-r from-teal-400 via-purple-400 to-pink-500 bg-clip-text text-transparent">Twin</span>
+            Study<span className="bg-gradient-to-r from-[#36A852] via-[#B7E51D] to-[#FFD900] bg-clip-text text-transparent">Twin</span>
           </span>
-          <span className="px-2 py-0.5 rounded-md bg-gradient-to-r from-teal-500 via-purple-600 to-pink-600 text-white font-extrabold text-[10px] tracking-wider uppercase shadow-md shadow-teal-500/25">
+          <span className="px-2 py-0.5 rounded-md bg-gradient-to-r from-[#168F3B] via-[#63C63D] to-[#B7E51D] text-slate-950 font-black text-[10px] tracking-wider uppercase shadow-md shadow-[#63C63D]/25">
             AI
           </span>
         </div>

@@ -31,12 +31,12 @@ export function ToastProvider({ children }) {
       {children}
       <div className="fixed bottom-5 right-5 z-50 space-y-3 max-w-md w-full px-4 pointer-events-none">
         {toasts.map(toast => {
-          let bgClass = 'bg-slate-900 border-slate-700 text-slate-100';
+          let bgClass = 'glass-panel text-slate-100 dark:text-white light:text-slate-900 border-emerald-500/30';
           let Icon = Info;
-          let iconColor = 'text-indigo-400';
+          let iconColor = 'text-lime-400';
 
           if (toast.type === 'success') {
-            bgClass = 'bg-emerald-950/90 border-emerald-800/80 text-emerald-100';
+            bgClass = 'glass-panel text-emerald-300 border-emerald-500/50';
             Icon = CheckCircle2;
             iconColor = 'text-emerald-400';
           } else if (toast.type === 'error') {

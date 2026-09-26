@@ -33,9 +33,9 @@ export default function Input({
           onChange={onChange}
           placeholder={placeholder}
           required={required}
-          className={`w-full bg-slate-900/90 dark:bg-slate-900/90 light:bg-white border ${
-            error ? 'border-rose-500/80 focus:ring-rose-500' : 'border-slate-800 dark:border-slate-800 light:border-amber-200 focus:border-teal-500 focus:ring-teal-500/30'
-          } rounded-xl ${Icon ? 'pl-10' : 'px-4'} py-2.5 text-sm text-slate-100 dark:text-white light:text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 transition-all duration-200 ${className}`}
+          className={`w-full glass-input border ${
+            error ? 'border-rose-500/80 focus:ring-rose-500' : 'border-emerald-500/30 focus:border-emerald-400 focus:ring-lime-400/30'
+          } rounded-xl ${Icon ? 'pl-10' : 'px-4'} py-2.5 text-sm text-slate-100 dark:text-white light:text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 transition-all duration-200 ${className}`}
           {...props}
         />
       </div>

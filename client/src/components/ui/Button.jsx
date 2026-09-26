@@ -1,5 +1,9 @@
 import React from 'react';
 
+/**
+ * Button - Green -> Lime -> Yellow Futuristic Glass Button
+ * Requirement: Primary = GREEN -> LIME, Important = LIME -> YELLOW, Success = GREEN, Achievement = YELLOW/GOLD
+ */
 export default function Button({
   children,
   type = 'button',
@@ -11,20 +15,23 @@ export default function Button({
   onClick,
   ...props
 }) {
-  const baseStyle = 'inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer';
+  const baseStyle = 'inline-flex items-center justify-center font-bold rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer select-none';
 
   const variants = {
-    primary: 'bg-gradient-to-r from-teal-500 via-purple-600 to-pink-600 hover:from-teal-400 hover:via-purple-500 hover:to-pink-500 text-white shadow-lg shadow-teal-500/25 focus:ring-teal-500 border border-teal-400/30',
-    secondary: 'bg-slate-900/90 dark:bg-slate-900/90 light:bg-white hover:bg-slate-800 dark:hover:bg-slate-800 light:hover:bg-amber-50 text-slate-100 dark:text-white light:text-slate-900 border border-slate-800 dark:border-slate-800 light:border-amber-200 focus:ring-teal-500',
-    outline: 'border border-slate-800 dark:border-slate-800 light:border-amber-300 hover:border-teal-500/60 text-slate-300 dark:text-slate-300 light:text-slate-700 hover:text-white dark:hover:text-white light:hover:text-slate-900 bg-slate-950/40 dark:bg-slate-950/40 light:bg-white/60 focus:ring-teal-500',
-    danger: 'bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-600/20 focus:ring-rose-500',
-    ghost: 'text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-white dark:hover:text-white light:hover:text-slate-900 hover:bg-slate-900/60 bg-transparent'
+    primary: 'bg-gradient-to-r from-[#168F3B] via-[#63C63D] to-[#B7E51D] hover:from-[#0B7A32] hover:via-[#36A852] hover:to-[#63C63D] text-slate-950 font-black shadow-lg shadow-[#63C63D]/25 focus:ring-[#63C63D] border border-[#B7E51D]/40',
+    important: 'bg-gradient-to-r from-[#B7E51D] via-[#D5F51C] to-[#FFD900] hover:from-[#63C63D] hover:via-[#B7E51D] hover:to-[#FFC400] text-slate-950 font-black shadow-lg shadow-[#FFD900]/30 focus:ring-[#FFD900] border border-[#FFEA3A]/50',
+    secondary: 'glass-card hover:bg-[#63C63D]/15 text-slate-900 dark:text-slate-100 border border-[#63C63D]/30 focus:ring-[#63C63D]',
+    outline: 'border border-[#63C63D]/40 hover:border-[#B7E51D] text-[#36A852] dark:text-[#B7E51D] hover:text-slate-950 hover:bg-[#B7E51D] glass-pill focus:ring-[#63C63D]',
+    success: 'bg-[#36A852] hover:bg-[#168F3B] text-white shadow-md shadow-[#36A852]/20 focus:ring-[#36A852]',
+    achievement: 'bg-[#FFD900] hover:bg-[#FFC400] text-slate-950 font-black shadow-md shadow-[#FFD900]/25 focus:ring-[#FFD900]',
+    danger: 'bg-rose-600 hover:bg-rose-500 text-white shadow-md shadow-rose-600/20 focus:ring-rose-500',
+    ghost: 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-[#63C63D]/10 bg-transparent'
   };
 
   const sizes = {
-    sm: 'px-3 py-1.5 text-xs',
-    md: 'px-4 py-2.5 text-sm',
-    lg: 'px-6 py-3.5 text-base font-semibold'
+    sm: 'px-3.5 py-1.5 text-xs',
+    md: 'px-5 py-2.5 text-sm',
+    lg: 'px-7 py-3.5 text-base font-extrabold'
   };
 
   return (

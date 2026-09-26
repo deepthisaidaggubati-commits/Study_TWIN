@@ -47,25 +47,25 @@ export default function LoginPage() {
         <ThemeToggle showLabel />
       </div>
 
-      <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-8 bg-slate-900/80 dark:bg-slate-900/80 light:bg-white/90 border border-teal-500/30 dark:border-teal-500/30 light:border-amber-300/80 p-8 sm:p-10 rounded-3xl shadow-2xl backdrop-blur-xl relative z-10 items-center">
+      <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-8 glass-panel p-8 sm:p-10 rounded-3xl relative z-10 items-center">
         
         {/* Left Side: 3D Mini Student Twin Greeting */}
         <div className="flex flex-col items-center text-center space-y-4">
           <StudentTwinAvatar3D size="hero" animated />
           <div className="space-y-1">
             <h3 className="text-2xl font-black text-slate-100 dark:text-white light:text-slate-900">Meet your Learning Twin</h3>
-            <p className="text-xs text-slate-400 dark:text-slate-400 light:text-slate-600 leading-relaxed max-w-xs">
+            <p className="text-xs text-slate-300 dark:text-slate-300 light:text-slate-700 leading-relaxed max-w-xs">
               An AI companion that continuously evolves as you learn.
             </p>
           </div>
         </div>
 
         {/* Right Side: Form */}
-        <div className="space-y-6 border-t lg:border-t-0 lg:border-l border-slate-800 dark:border-slate-800 light:border-amber-200 pt-6 lg:pt-0 lg:pl-8">
+        <div className="space-y-6 border-t lg:border-t-0 lg:border-l border-emerald-500/20 dark:border-emerald-500/20 light:border-emerald-700/20 pt-6 lg:pt-0 lg:pl-8">
           <div className="space-y-2">
             <StudyTwinLogo variant="full" size="md" animated />
             <h2 className="text-xl font-bold text-slate-100 dark:text-white light:text-slate-900 tracking-tight pt-2">Welcome Back</h2>
-            <p className="text-xs text-slate-400 dark:text-slate-400 light:text-slate-600">Access your digital learning twin environment</p>
+            <p className="text-xs text-slate-300 dark:text-slate-300 light:text-slate-700">Access your digital learning twin environment</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -95,9 +95,9 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          <div className="text-center pt-2 border-t border-slate-800 dark:border-slate-800 light:border-amber-200 text-xs text-slate-400 dark:text-slate-400 light:text-slate-600">
+          <div className="text-center pt-2 border-t border-emerald-500/20 dark:border-emerald-500/20 light:border-emerald-700/20 text-xs text-slate-300 dark:text-slate-300 light:text-slate-700">
             Don't have a Digital Twin yet?{' '}
-            <Link to="/register" className="text-teal-400 dark:text-teal-300 light:text-teal-700 font-bold hover:underline">
+            <Link to="/register" className="text-lime-400 dark:text-lime-300 light:text-emerald-800 font-bold hover:underline">
               Register Here
             </Link>
           </div>

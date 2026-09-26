@@ -16,12 +16,10 @@ import {
   Sliders,
   Network,
   User,
-  Settings,
   LogOut,
   Menu,
   X,
   Sparkles,
-  Zap,
   Lightbulb
 } from 'lucide-react';
 
@@ -36,7 +34,6 @@ export default function DashboardLayout() {
     navigate('/login');
   };
 
-  // Requirement 20: Sidebar navigation structure
   const navItems = [
     { name: 'My Twin', path: '/my-twin', icon: Brain, isTwin: true },
     { name: 'Overview', path: '/dashboard', icon: LayoutDashboard },
@@ -54,12 +51,12 @@ export default function DashboardLayout() {
 
   return (
     <div className="min-h-screen flex overflow-hidden relative font-sans transition-colors duration-300">
-      {/* Moving Atmospheric Background & Particle Network (Requirement 4 & 5) */}
+      {/* Moving Student Environment (Green -> Lime -> Yellow) */}
       <AtmosphericBackground />
 
       {/* Sidebar - Desktop */}
       <aside className="hidden lg:flex lg:flex-col w-64 glass-panel border-r flex-shrink-0 relative z-20">
-        <div className="p-5 border-b border-slate-200/20 dark:border-slate-700/30 flex items-center justify-between">
+        <div className="p-5 border-b border-slate-200/20 dark:border-slate-800/40 flex items-center justify-between">
           <NavLink to="/dashboard" className="focus:outline-none">
             <StudyTwinLogo variant="full" size="md" animated />
           </NavLink>
@@ -75,15 +72,15 @@ export default function DashboardLayout() {
                 <NavLink
                   key={item.path}
                   to={item.path}
-                  className={`flex items-center space-x-3 px-4 py-3 rounded-2xl font-bold text-sm transition-all duration-300 shadow-lg ${
+                  className={`flex items-center space-x-3 px-4 py-3 rounded-2xl font-black text-sm transition-all duration-300 shadow-lg ${
                     isActive
-                      ? 'bg-gradient-to-r from-teal-400 via-purple-600 to-pink-500 text-white shadow-teal-500/30 scale-[1.02]'
-                      : 'bg-gradient-to-r from-teal-500/15 via-purple-500/15 to-pink-500/15 text-slate-900 dark:text-white border border-teal-500/30 hover:border-teal-400/60'
+                      ? 'bg-gradient-to-r from-[#168F3B] via-[#63C63D] via-[#B7E51D] to-[#FFD900] text-slate-950 shadow-[#63C63D]/30 scale-[1.02]'
+                      : 'bg-gradient-to-r from-[#168F3B]/15 via-[#63C63D]/15 to-[#B7E51D]/15 text-slate-900 dark:text-white border border-[#63C63D]/40 hover:border-[#B7E51D]'
                   }`}
                 >
-                  <Icon className="w-5 h-5 text-teal-400 animate-pulse" />
+                  <Icon className="w-5 h-5 text-[#63C63D] dark:text-[#B7E51D] animate-pulse" />
                   <span className="tracking-tight">{item.name}</span>
-                  <span className="ml-auto text-[10px] bg-teal-400/25 text-teal-300 dark:text-teal-300 light:text-teal-800 px-2 py-0.5 rounded-full font-black uppercase tracking-widest border border-teal-400/40">
+                  <span className="ml-auto text-[10px] bg-[#63C63D]/25 text-[#168F3B] dark:text-[#B7E51D] px-2 py-0.5 rounded-full font-black uppercase tracking-widest border border-[#63C63D]/40">
                     AI
                   </span>
                 </NavLink>
@@ -94,23 +91,23 @@ export default function DashboardLayout() {
               <NavLink
                 key={item.path}
                 to={item.path}
-                className={`flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-200 ${
+                className={`flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all duration-200 ${
                   isActive
-                    ? 'bg-gradient-to-r from-teal-500 via-purple-600 to-pink-600 text-white shadow-md shadow-teal-500/20 font-bold'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-white/40 dark:hover:bg-slate-800/40'
+                    ? 'bg-gradient-to-r from-[#168F3B] via-[#63C63D] to-[#B7E51D] text-slate-950 shadow-md shadow-[#63C63D]/20 font-black'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-[#63C63D]/10 hover:border-[#63C63D]/30 border border-transparent'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+                <Icon className={`w-4 h-4 ${isActive ? 'text-slate-950' : 'text-slate-400'}`} />
                 <span>{item.name}</span>
               </NavLink>
             );
           })}
         </nav>
 
-        {/* User Card & Logout */}
-        <div className="p-4 border-t border-slate-200/20 dark:border-slate-700/30">
+        {/* User Profile Card & Sign Out */}
+        <div className="p-4 border-t border-slate-200/20 dark:border-slate-800/40">
           <div className="flex items-center space-x-3 p-2.5 rounded-xl glass-pill mb-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-teal-400 via-purple-500 to-pink-500 flex items-center justify-center font-bold text-white text-xs shadow-md">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#168F3B] via-[#63C63D] to-[#B7E51D] flex items-center justify-center font-black text-slate-950 text-xs shadow-md">
               {user?.name ? user.name.charAt(0).toUpperCase() : 'S'}
             </div>
             <div className="truncate">
@@ -120,7 +117,7 @@ export default function DashboardLayout() {
           </div>
           <button
             onClick={handleLogout}
-            className="w-full flex items-center justify-center space-x-2 px-3 py-2 rounded-xl text-xs font-semibold text-rose-500 hover:bg-rose-500/10 border border-transparent hover:border-rose-500/20 transition-all cursor-pointer"
+            className="w-full flex items-center justify-center space-x-2 px-3 py-2 rounded-xl text-xs font-bold text-rose-500 hover:bg-rose-500/10 border border-transparent hover:border-rose-500/20 transition-all cursor-pointer"
           >
             <LogOut className="w-4 h-4" />
             <span>Sign Out</span>
@@ -139,7 +136,7 @@ export default function DashboardLayout() {
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="p-4 border-b border-slate-200/20 dark:border-slate-700/30 flex items-center justify-between">
+        <div className="p-4 border-b border-slate-200/20 dark:border-slate-800/40 flex items-center justify-between">
           <StudyTwinLogo variant="full" size="sm" animated />
           <button onClick={() => setMobileOpen(false)} className="text-slate-400 hover:text-white p-1">
             <X className="w-5 h-5" />
@@ -154,8 +151,8 @@ export default function DashboardLayout() {
                 key={item.path}
                 to={item.path}
                 onClick={() => setMobileOpen(false)}
-                className={`flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold ${
-                  isActive ? 'bg-gradient-to-r from-teal-500 via-purple-600 to-pink-600 text-white font-bold' : 'text-slate-600 dark:text-slate-300 hover:bg-white/40 dark:hover:bg-slate-800/40'
+                className={`flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-xs font-bold ${
+                  isActive ? 'bg-gradient-to-r from-[#168F3B] via-[#63C63D] to-[#B7E51D] text-slate-950' : 'text-slate-600 dark:text-slate-300 hover:bg-[#63C63D]/10'
                 }`}
               >
                 <Icon className="w-4 h-4" />
@@ -177,7 +174,7 @@ export default function DashboardLayout() {
             >
               <Menu className="w-5 h-5" />
             </button>
-            <h2 className="text-sm font-bold text-slate-900 dark:text-white capitalize hidden sm:block">
+            <h2 className="text-sm font-black text-slate-900 dark:text-white capitalize hidden sm:block">
               {location.pathname.replace('/', '').replace('-', ' ') || 'Dashboard'}
             </h2>
           </div>
@@ -186,22 +183,22 @@ export default function DashboardLayout() {
             {/* Theme Toggle Button (Digital Sunrise ☀️ vs Digital Night 🌙) */}
             <ThemeToggle showLabel={true} />
 
-            {/* Requirement 21: Topbar Status */}
-            <div className="hidden sm:flex items-center space-x-2 px-3.5 py-1.5 rounded-full glass-pill border border-teal-500/30 text-xs font-bold">
-              <span className="w-2 h-2 rounded-full bg-teal-400 animate-ping" />
-              <span className="bg-gradient-to-r from-teal-400 via-purple-400 to-amber-400 bg-clip-text text-transparent font-extrabold">
+            {/* Topbar Status */}
+            <div className="hidden sm:flex items-center space-x-2 px-3.5 py-1.5 rounded-full glass-pill border border-[#63C63D]/40 text-xs font-bold">
+              <span className="w-2 h-2 rounded-full bg-[#63C63D] animate-ping" />
+              <span className="bg-gradient-to-r from-[#168F3B] via-[#63C63D] via-[#B7E51D] to-[#FFD900] bg-clip-text text-transparent font-black">
                 ✦ Twin Online
               </span>
-              <span className="text-slate-400 text-[11px] font-normal ml-1">"Learning with you"</span>
+              <span className="text-slate-500 dark:text-slate-400 text-[11px] font-normal ml-1">"Learning with you"</span>
             </div>
 
             {/* User Profile */}
-            <NavLink to="/profile" className="flex items-center space-x-3 border-l border-slate-200/20 dark:border-slate-700/30 pl-4 group">
+            <NavLink to="/profile" className="flex items-center space-x-3 border-l border-slate-200/20 dark:border-slate-800/40 pl-4 group">
               <div className="text-right hidden md:block">
-                <p className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-teal-400 transition-colors">{user?.name}</p>
-                <p className="text-[10px] text-teal-600 dark:text-teal-400 font-semibold">{user?.branch || 'Student'}</p>
+                <p className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-[#63C63D] transition-colors">{user?.name}</p>
+                <p className="text-[10px] text-[#36A852] dark:text-[#B7E51D] font-bold">{user?.branch || 'Student'}</p>
               </div>
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal-400 via-purple-600 to-pink-500 flex items-center justify-center text-white font-bold text-sm shadow-md group-hover:scale-105 transition-transform">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#168F3B] via-[#63C63D] to-[#B7E51D] flex items-center justify-center text-slate-950 font-black text-sm shadow-md group-hover:scale-105 transition-transform">
                 {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
               </div>
             </NavLink>

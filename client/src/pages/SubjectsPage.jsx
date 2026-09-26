@@ -57,14 +57,14 @@ export default function SubjectsPage() {
     }
   };
 
-  if (loading) return <LoadingSpinner label="Fetching your subjects..." />;
+  if (loading) return <LoadingSpinner label="Fetching your academic subjects..." />;
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Academic Subjects</h1>
-          <p className="text-xs text-slate-400">Manage courses, curricula, and upcoming exam target dates</p>
+          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">Academic Subjects</h1>
+          <p className="text-xs text-slate-500 dark:text-slate-400">Manage courses, curricula, and upcoming exam target dates</p>
         </div>
         <Button variant="primary" size="md" onClick={() => setShowForm(!showForm)}>
           <Plus className="w-4 h-4 mr-1" />
@@ -104,21 +104,21 @@ export default function SubjectsPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {subjects.map(s => (
-          <Card key={s._id} className="relative group">
+          <Card key={s._id} hover className="relative group border-[#63C63D]/30">
             <div className="flex justify-between items-start">
-              <div className="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-xl bg-[#63C63D]/20 text-[#168F3B] dark:text-[#B7E51D] flex items-center justify-center font-bold">
                 <BookOpen className="w-5 h-5" />
               </div>
-              <button onClick={() => handleDelete(s._id)} className="text-slate-500 hover:text-rose-400 p-1">
+              <button onClick={() => handleDelete(s._id)} className="text-slate-400 hover:text-rose-500 p-1">
                 <Trash2 className="w-4 h-4" />
               </button>
             </div>
 
-            <h3 className="text-lg font-bold text-white mt-4">{s.name}</h3>
-            <p className="text-xs text-slate-400 mt-1 line-clamp-2">{s.description || 'No description provided.'}</p>
+            <h3 className="text-lg font-extrabold text-slate-900 dark:text-white mt-4">{s.name}</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">{s.description || 'No description provided.'}</p>
 
             {s.examDate && (
-              <div className="mt-4 pt-3 border-t border-slate-800 flex items-center text-xs text-indigo-300 font-medium space-x-1.5">
+              <div className="mt-4 pt-3 border-t border-slate-200/20 dark:border-slate-800/40 flex items-center text-xs text-[#168F3B] dark:text-[#B7E51D] font-bold space-x-1.5">
                 <Calendar className="w-3.5 h-3.5" />
                 <span>Exam: {new Date(s.examDate).toLocaleDateString()}</span>
               </div>
@@ -127,7 +127,7 @@ export default function SubjectsPage() {
         ))}
 
         {subjects.length === 0 && !showForm && (
-          <div className="col-span-full p-12 text-center bg-slate-900/40 rounded-2xl border border-slate-800 text-slate-400 text-sm">
+          <div className="col-span-full p-12 text-center glass-card text-slate-500 dark:text-slate-400 text-sm">
             No subjects added yet. Click "Add New Subject" to begin!
           </div>
         )}
